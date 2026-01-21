@@ -1,0 +1,28 @@
+---
+title: "winter school"
+author: "Dmitro Poplavskyi"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+interviews <- read_csv("data/SAFI_clean.csv", na = "NULL")
+
+```
+
+![](img/safi.png)
+##tandom
+```{r echo=F}
+interviews %>%
+  filter(!is.na(memb_assoc)) %>%
+  group_by(village, memb_assoc) %>%
+  summarize(mean_no_membrs = mean(no_membrs)) %>%
+  knitr::kable(caption = "We can also add a caption.",
+               col.names = c("Village", "Member Association", 
+                             "Mean Number of Members"))
+                             
+```
